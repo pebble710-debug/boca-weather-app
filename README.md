@@ -6,7 +6,9 @@ A simple weather app for Boca Raton, Florida (26.3683, -80.1289) with an Apple-i
 
 - Current temperature (°F) and conditions
 - Feels-like temperature, humidity, and wind speed
+- 24-hour forecast (time, temperature, icon, chance of rain) in a horizontal strip, in the city's local time
 - 5-day forecast with weather icons
+- Change location: search any city (Open-Meteo Geocoding API); your choice is remembered, with a one-tap return to Boca Raton
 - Refresh button
 - Light / Dark / Auto appearance switch (Auto follows your device setting; your choice is remembered)
 - Live data from the free [Open-Meteo API](https://open-meteo.com/) (no API key needed)
@@ -15,7 +17,7 @@ A simple weather app for Boca Raton, Florida (26.3683, -80.1289) with an Apple-i
 
 - `index.html` – page structure
 - `style.css` – glassmorphism styling
-- `script.js` – fetches and displays weather data
+- `script.js` – fetches and displays weather data, hourly forecast, and location search
 - `theme.js` – Light / Dark / Auto appearance switch
 - `netlify.toml` – Netlify config (no build command)
 
