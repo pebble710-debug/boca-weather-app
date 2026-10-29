@@ -6,6 +6,17 @@
   <title>Boca Raton Weather</title>
   <meta name="description" content="Live weather for Boca Raton, Florida, powered by the Open-Meteo API.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛅</text></svg>">
+  <meta name="theme-color" content="#3a8ee6">
+  <script>
+    // Apply the saved theme before first paint to avoid a flash
+    (function () {
+      var pref = "auto";
+      try { pref = localStorage.getItem("boca-weather-theme") || "auto"; } catch (e) {}
+      var dark = pref === "dark" ||
+        (pref !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    })();
+  </script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,12 +29,37 @@
         <h1 class="location">Boca Raton</h1>
         <p class="subtitle">Florida, USA</p>
       </div>
-      <button id="refreshBtn" class="refresh-btn" type="button" aria-label="Refresh weather">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
-        </svg>
-        <span>Refresh</span>
-      </button>
+      <div class="header-actions">
+        <div class="theme-switch" role="radiogroup" aria-label="Appearance">
+          <span class="theme-indicator" aria-hidden="true"></span>
+          <button type="button" class="theme-option" role="radio" data-theme-choice="light" aria-label="Light" title="Light">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.5" fill="currentColor"/>
+              <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>
+              </g>
+            </svg>
+          </button>
+          <button type="button" class="theme-option" role="radio" data-theme-choice="dark" aria-label="Dark" title="Dark">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path fill="currentColor" d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/>
+            </svg>
+          </button>
+          <button type="button" class="theme-option" role="radio" data-theme-choice="auto" aria-label="Auto (match system)" title="Auto">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <rect x="2.5" y="4" width="19" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 5v11h-8V6.5A1.5 1.5 0 0 1 5.5 5z" fill="currentColor"/>
+              <path d="M8.5 21h7M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <button id="refreshBtn" class="refresh-btn" type="button" aria-label="Refresh weather">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+          </svg>
+          <span>Refresh</span>
+        </button>
+      </div>
     </header>
 
     <section class="card current" aria-live="polite">
@@ -64,6 +100,7 @@
     </footer>
   </main>
 
+  <script src="theme.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
